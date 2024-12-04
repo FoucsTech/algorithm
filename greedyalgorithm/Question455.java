@@ -12,8 +12,8 @@ public class Question455 {
      * 优先让胃口最小的孩子吃到能满足他胃口的最小饼干
      */
     public int findContentChildren(int[] g, int[] s) {
-        Arrays.sort(g);
-        Arrays.sort(s);
+        Arrays.sort(g); //nlog(n)
+        Arrays.sort(s); //nlog(n)
         int count = 0;
         outLoop:
         for (int k : g) {
@@ -27,5 +27,19 @@ public class Question455 {
             }
         }
         return count;
+    }
+
+    //仅需一次遍历
+    public int findContentChildren2(int[] g, int[] s) {
+        Arrays.sort(g); //nlog(n)
+        Arrays.sort(s); //nlog(n)
+        int child = 0, cookie = 0;
+        while (child < g.length && cookie < s.length) {  //n
+            if (g[child] <= s[cookie]) {
+                ++child;
+            }
+            cookie++;
+        }
+        return child;
     }
 }
